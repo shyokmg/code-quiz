@@ -1,4 +1,5 @@
-// Get time element
+// Get elements
+var startButton = document.getElementById("start-button");
 var timerEl = document.getElementById("timer");
 // Set timer to 60 seconds
 var secondsLeft = 60;
@@ -15,4 +16,20 @@ function setTime() {
     }, 1000);
 }
 
-setTime()
+startButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    var element = event.target;
+    if (element.matches("div")){
+        var state = element.dataset.state;
+        if (state === "hidden"){
+            element.setAttribute("data-state", "visible");
+        } else {
+            element.setAttribute("data-state", "hidden");
+        }
+    }
+    
+    
+    
+    setTime()
+
+});
