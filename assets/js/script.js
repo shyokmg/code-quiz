@@ -16,12 +16,14 @@ var initialsInput = document.querySelector("#initials-text");
 var secondsLeft = 0;
 var currentQuestion;
 var index = 0;
-var highscores = [];
+var highscores;
 var timerInterval;
+var countDown = 0;
+var storedScores;
 
 // Timer functions
 function setTime() {
-    // Set timer to 60 seconds
+    // Set timer to 75 seconds
     secondsLeft = 75;
     timerEl.textContent = "Time: " + secondsLeft;
     timerInterval = setInterval(function () {
@@ -34,6 +36,20 @@ function setTime() {
     }, 1000);
 }
 
+
+function resultTimer() {
+   countDown = 2;
+    var resultTimerInterval = setInterval(function () {
+        if (countDown > 0) {
+            countDown--;
+        } else {
+            bottomResult.setAttribute("data-state", "hidden");
+            clearInterval(resultTimerInterval);
+        }
+    }, 1000);
+}
+
+
 // Function when start button is pressed
 startButton.addEventListener("click", function (event) {
     // start timer
@@ -42,7 +58,7 @@ startButton.addEventListener("click", function (event) {
     // show question container and hide the start container
     startEl.setAttribute("data-state", "hidden");
     quizEl.setAttribute("data-state", "visible");
-    scoresLink.setAttribute("data-state", "hidden");
+    
     nextQuestion();
 });
 
@@ -60,28 +76,39 @@ quizEl.addEventListener("click", function (event) {
         if (answer === "correct") {
             // do something, set bottom result to correct
             bottomResult.textContent = "Correct!"
-
-            // move to next question.
-            nextQuestion();
+            bottomResult.setAttribute("data-state", "visible");
+            
         } else {
             // set bottom result to wrong
             bottomResult.textContent = "Wrong!"
+            bottomResult.setAttribute("data-state", "visible");
             // subtract 15 sec from timer
             secondsLeft = secondsLeft - 15;
-            // move to next question
-            nextQuestion();
         }
+
+         // move to next question.
+         nextQuestion();
+        resultTimer();
     }
 })
 
 // Event when submit button is pressed after game over
 scoreForm.addEventListener("submit", function (event) {
+
+    // append number
+    var currentNum = storedScores.length;
+    if (currentNum === 0){
+        currentNum = 1;
+    } else {
+        currentNum++;
+    }
+
     // get initials input
     var initialsText = initialsInput.value.trim();
     // get recorded seconds
     var timeLeft = secondsLeft;
     // combine intials and seconds to score entry
-    var scoreEntry = initialsText + " - " + timeLeft;
+    var scoreEntry = currentNum + ". " + initialsText + " - " + timeLeft;
     
     // check if input is empty
     if (initialsText === "") {
@@ -100,8 +127,8 @@ scoreForm.addEventListener("submit", function (event) {
 
 // Array for the available questions
 var questionArr = [
-    "question1",
-    "question2",
+    "Commonly used data types DO NOT include:",
+    "The condition in an if/ else statement is enclosed within ____.",
     "question3",
     "question4",
     "question5",
@@ -115,8 +142,8 @@ var questionArr = [
 //Object with all available answers
 var answerObj = {
     choices: [
-        ["a", "b", "c", "d"],
-        ["a", "b", "c", "d"],
+        ["1. strings", "2. booleans", "3. alerts", "4. numbers"],
+        ["1. quotes", "2. curly brackets", "3. parantheses", "4. square brackets"],
         ["a", "b", "c", "d"],
         ["a", "b", "c", "d"],
         ["a", "b", "c", "d"],
@@ -126,8 +153,8 @@ var answerObj = {
         ["a", "b", "c", "d"],
         ["a", "b", "c", "d"]],
     cheatSheet: [
-        ["correct", "wrong", "wrong", "wrong"],
-        ["correct", "wrong", "wrong", "wrong"],
+        ["wrong", "wrong", "correct", "wrong"],
+        ["wrong", "correct", "wrong", "wrong"],
         ["correct", "wrong", "wrong", "wrong"],
         ["correct", "wrong", "wrong", "wrong"],
         ["correct", "wrong", "wrong", "wrong"],
@@ -189,7 +216,7 @@ function gameOver() {
     scoreResult.textContent = secondsLeft;
     quizEl.setAttribute("data-state", "hidden");
     scoreEl.setAttribute("data-state", "visible");
-    scoresLink.setAttribute("data-state", "visible");
+    
 }
 
 
@@ -200,7 +227,7 @@ function storeScores() {
 
 // Initialize page to get scores from local storage
 function init() {
-    var storedScores = JSON.parse(localStorage.getItem("highscores"));
+    storedScores = JSON.parse(localStorage.getItem("highscores"));
     secondsLeft = 0;
     timerEl.textContent = "Time: " + secondsLeft;
     if (storedScores !== null) {
