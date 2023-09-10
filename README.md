@@ -14,10 +14,12 @@ https://shyokmg.github.io/code-quiz/
 
 ## Credits
 
-Storing in local storage
+Storing in local storage:
+
 https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 
-Setting timers
+Setting timers:
+
 https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval
 https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/clearInterval
 
