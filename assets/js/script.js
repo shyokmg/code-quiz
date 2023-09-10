@@ -8,11 +8,13 @@ var bottomResult = document.querySelector(".result");
 var questionEl = document.querySelector(".questions");
 var choicesChild = document.getElementById("choices");
 var scoreResult = document.getElementById("score-result");
+var scoresLink = document.querySelector("#highscores-link")
+
 
 var scoreForm = document.querySelector("#score-form");
 var initialsInput = document.querySelector("#initials-text");
-var backButton = document.querySelector("#back");
-var scoreList = document.querySelector("#score-list");
+
+
 
 var highscores = [];
 
@@ -24,14 +26,17 @@ var index = 0;
 
 
 var timerInterval;
+var checkPage = document.head.children[5].textContent;
+
 // Timer functions
 function setTime() {
     // Set timer to 60 seconds
     secondsLeft = 75;
+    timerEl.textContent = "Time: " + secondsLeft;
     timerInterval = setInterval(function () {
-        if (secondsLeft > 0){
-            timerEl.textContent = "Time: " + secondsLeft;
+        if (secondsLeft > 0) {
             secondsLeft--;
+            timerEl.textContent = "Time: " + secondsLeft;
         } else {
             gameOver();
         }
@@ -39,15 +44,16 @@ function setTime() {
 }
 
 
+
 // Function when start button is pressed
 startButton.addEventListener("click", function (event) {
-    event.preventDefault();
     // start timer
     setTime();
-    // set questions
+
     // show question container and hide the start container
     startEl.setAttribute("data-state", "hidden");
     quizEl.setAttribute("data-state", "visible");
+    scoresLink.setAttribute("data-state", "hidden");
     nextQuestion();
 });
 
@@ -79,6 +85,23 @@ quizEl.addEventListener("click", function (event) {
     }
 })
 
+
+scoreForm.addEventListener("submit", function (event) {
+    var initialsText = initialsInput.value.trim();
+    var timeLeft = secondsLeft;
+    var scoreEntry = initialsText + " - " + timeLeft;
+    
+    if (initialsText === "") {
+        return;
+    }
+    highscores.push(scoreEntry);
+    initialsInput.value = "";
+    
+    storeScores();
+    
+})
+
+
 // Array for the available questions
 var questionArr = [
     "question1",
@@ -96,26 +119,26 @@ var questionArr = [
 //Object with all available answers
 var answerObj = {
     choices: [
-        ["a", "b", "c", "d"], 
-        ["a", "b", "c", "d"], 
-        ["a", "b", "c", "d"], 
-        ["a", "b", "c", "d"], 
-        ["a", "b", "c", "d"], 
         ["a", "b", "c", "d"],
-        ["a", "b", "c", "d"], 
-        ["a", "b", "c", "d"], 
-        ["a", "b", "c", "d"], 
+        ["a", "b", "c", "d"],
+        ["a", "b", "c", "d"],
+        ["a", "b", "c", "d"],
+        ["a", "b", "c", "d"],
+        ["a", "b", "c", "d"],
+        ["a", "b", "c", "d"],
+        ["a", "b", "c", "d"],
+        ["a", "b", "c", "d"],
         ["a", "b", "c", "d"]],
     cheatSheet: [
-        ["correct", "wrong", "wrong", "wrong"], 
-        ["correct", "wrong", "wrong", "wrong"], 
-        ["correct", "wrong", "wrong", "wrong"], 
-        ["correct", "wrong", "wrong", "wrong"], 
-        ["correct", "wrong", "wrong", "wrong"], 
-        ["correct", "wrong", "wrong", "wrong"], 
-        ["correct", "wrong", "wrong", "wrong"], 
-        ["correct", "wrong", "wrong", "wrong"], 
-        ["correct", "wrong", "wrong", "wrong"], 
+        ["correct", "wrong", "wrong", "wrong"],
+        ["correct", "wrong", "wrong", "wrong"],
+        ["correct", "wrong", "wrong", "wrong"],
+        ["correct", "wrong", "wrong", "wrong"],
+        ["correct", "wrong", "wrong", "wrong"],
+        ["correct", "wrong", "wrong", "wrong"],
+        ["correct", "wrong", "wrong", "wrong"],
+        ["correct", "wrong", "wrong", "wrong"],
+        ["correct", "wrong", "wrong", "wrong"],
         ["correct", "wrong", "wrong", "wrong"]
         // ["correct", "wrong", "wrong", "wrong"], 
         // ["wrong", "correct", "wrong", "wrong"], 
@@ -149,7 +172,7 @@ function nextQuestion() {
 
         var choicesButtons = quizObj.answers.choices[index];
         var choicesAnswers = quizObj.answers.cheatSheet[index];
-        for (var i=0; i< choicesButtons.length; i++){
+        for (var i = 0; i < choicesButtons.length; i++) {
             // Adds the choices to buttons
             choicesChild.children[i].children[0].textContent = choicesButtons[i];
             // sets the data-answer attr to the buttons to determine which answer is correct/wrong
@@ -163,54 +186,31 @@ function nextQuestion() {
 // function to end game and show score
 function gameOver() {
     clearInterval(timerInterval);
-    if(secondsLeft <= 0){
+    if (secondsLeft <= 0) {
         secondsLeft = 0;
     }
     timerEl.textContent = "Time: " + secondsLeft;
     scoreResult.textContent = secondsLeft;
     quizEl.setAttribute("data-state", "hidden");
     scoreEl.setAttribute("data-state", "visible");
+    scoresLink.setAttribute("data-state", "visible");
 }
 
-function renderScores() {
-    for (var i = 0; i < highscores.length; i++){
-        var highscore = highscores[i];
-        var li = document.createElement("li");
-        li.textContent = highscore;
-        li.setAttribute("data-index", i);
-        scoreList.appendChild(li);
-    }
-}
 
-function init() {
-    var storedScores = JSON.parse(localStorage.getItem("highscores"));
-    // secondsLeft = 0;
-    timerEl.textContent = "Time: " + secondsLeft;
-    if (storedScores !== null){
-        highscores = storedScores;
-    }
-    // renderScores();
-}
 
 function storeScores() {
     localStorage.setItem("highscores", JSON.stringify(highscores));
 }
 
-scoreForm.addEventListener("submit", function(event){
-    // event.preventDefault();
-    window.location.href = "highscores.html";
-    var initialsText = initialsInput.value.trim();
-    var timeLeft = secondsLeft;
-    var scoreEntry = initialsText + " - " + timeLeft;
 
-    if (initialsText === ""){
-        return;
+function init() {
+    var storedScores = JSON.parse(localStorage.getItem("highscores"));
+    secondsLeft = 0;
+    timerEl.textContent = "Time: " + secondsLeft;
+    if (storedScores !== null) {
+        highscores = storedScores;
     }
-    highscores.push(scoreEntry);
-    initialsInput.value = "";
+}
 
-    storeScores();
-    renderScores();
-})
 
 init();
