@@ -129,14 +129,11 @@ scoreForm.addEventListener("submit", function (event) {
 var questionArr = [
     "Commonly used data types DO NOT include:",
     "The condition in an if/ else statement is enclosed within ____.",
-    "question3",
-    "question4",
-    "question5",
-    "question6",
-    "question7",
-    "question8",
-    "question9",
-    "question10"
+    "Arrays in JavaScript can be used to store ____.",
+    "Which of these is the strict operator?",
+    "What do you call a function inside an object?",
+    "The document method that uses the id property is ____.",
+    "What does API stand for?"
 ];
 
 //Object with all available answers
@@ -144,35 +141,20 @@ var answerObj = {
     choices: [
         ["1. strings", "2. booleans", "3. alerts", "4. numbers"],
         ["1. quotes", "2. curly brackets", "3. parantheses", "4. square brackets"],
-        ["a", "b", "c", "d"],
-        ["a", "b", "c", "d"],
-        ["a", "b", "c", "d"],
-        ["a", "b", "c", "d"],
-        ["a", "b", "c", "d"],
-        ["a", "b", "c", "d"],
-        ["a", "b", "c", "d"],
-        ["a", "b", "c", "d"]],
+        ["1. number and strings", "2. other arrays", "3. booleans", "4. all of the above"],
+        ["1. != ", "2. >= ", "3. === ", "4. || "],
+        ["1. variable", "2. function", "3. method", "4. nested function"],
+        ["1. getElementById()", "2. getElementByClass()", "3. querySelector()", "4. addEventListener()"],
+        ["1. Apple Power Integration", "2. Australian Property Institute ", "3. Application Programming Interface", "4. Average Principle Integration"]
+    ],
     cheatSheet: [
         ["wrong", "wrong", "correct", "wrong"],
         ["wrong", "correct", "wrong", "wrong"],
+        ["wrong", "wrong", "wrong", "correct"],
+        ["wrong", "wrong", "correct", "wrong"],
+        ["wrong", "wrong", "correct", "wrong"],
         ["correct", "wrong", "wrong", "wrong"],
-        ["correct", "wrong", "wrong", "wrong"],
-        ["correct", "wrong", "wrong", "wrong"],
-        ["correct", "wrong", "wrong", "wrong"],
-        ["correct", "wrong", "wrong", "wrong"],
-        ["correct", "wrong", "wrong", "wrong"],
-        ["correct", "wrong", "wrong", "wrong"],
-        ["correct", "wrong", "wrong", "wrong"]
-        // ["correct", "wrong", "wrong", "wrong"], 
-        // ["wrong", "correct", "wrong", "wrong"], 
-        // ["wrong", "wrong", "wrong", "correct"], 
-        // ["correct", "wrong", "wrong", "wrong"], 
-        // ["wrong", "wrong", "correct", "wrong"], 
-        // ["wrong", "correct", "wrong", "wrong"],
-        // ["wrong", "correct", "wrong", "wrong"], 
-        // ["correct", "wrong", "wrong", "wrong"], 
-        // ["wrong", "wrong", "correct", "wrong"], 
-        // ["wrong", "wrong", "wrong", "correct"]
+        ["wrong", "wrong", "correct", "wrong"]
     ],
 };
 
