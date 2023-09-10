@@ -84,6 +84,7 @@ quizEl.addEventListener("click", function (event) {
             bottomResult.setAttribute("data-state", "visible");
             // subtract 15 sec from timer
             secondsLeft = secondsLeft - 15;
+            timerEl.textContent = "Time: " + secondsLeft;
         }
 
          // move to next question.
