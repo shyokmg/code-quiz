@@ -1,32 +1,23 @@
 // Get elements
-var timerEl = document.getElementById("timer");
-var startButton = document.getElementById("start-button");
+var timerEl = document.querySelector("#timer");
+var startButton = document.querySelector("#start-button");
 var startEl = document.querySelector(".start-container");
 var quizEl = document.querySelector(".quiz-container");
 var scoreEl = document.querySelector(".finalscore-container");
 var bottomResult = document.querySelector(".result");
 var questionEl = document.querySelector(".questions");
-var choicesChild = document.getElementById("choices");
-var scoreResult = document.getElementById("score-result");
+var choicesChild = document.querySelector("#choices");
+var scoreResult = document.querySelector("#score-result");
 var scoresLink = document.querySelector("#highscores-link")
-
-
 var scoreForm = document.querySelector("#score-form");
 var initialsInput = document.querySelector("#initials-text");
-
-
-
-var highscores = [];
-
 
 //  set variables
 var secondsLeft = 0;
 var currentQuestion;
 var index = 0;
-
-
+var highscores = [];
 var timerInterval;
-var checkPage = document.head.children[5].textContent;
 
 // Timer functions
 function setTime() {
@@ -42,8 +33,6 @@ function setTime() {
         }
     }, 1000);
 }
-
-
 
 // Function when start button is pressed
 startButton.addEventListener("click", function (event) {
@@ -85,18 +74,25 @@ quizEl.addEventListener("click", function (event) {
     }
 })
 
-
+// Event when submit button is pressed after game over
 scoreForm.addEventListener("submit", function (event) {
+    // get initials input
     var initialsText = initialsInput.value.trim();
+    // get recorded seconds
     var timeLeft = secondsLeft;
+    // combine intials and seconds to score entry
     var scoreEntry = initialsText + " - " + timeLeft;
     
+    // check if input is empty
     if (initialsText === "") {
         return;
     }
+
+    // push score entries to array
     highscores.push(scoreEntry);
     initialsInput.value = "";
     
+    // call function to store to local storage
     storeScores();
     
 })
@@ -197,12 +193,12 @@ function gameOver() {
 }
 
 
-
+// Store current scores to local storage.
 function storeScores() {
     localStorage.setItem("highscores", JSON.stringify(highscores));
 }
 
-
+// Initialize page to get scores from local storage
 function init() {
     var storedScores = JSON.parse(localStorage.getItem("highscores"));
     secondsLeft = 0;
