@@ -5,9 +5,9 @@
 This website is Javascript Code Quiz challenge with the questions and answers that I have learned all throughout my journey to learning how to use Javascript.
 
 ## Code Quiz website
-![Main Page](./images/main_page.png)
-![Quiz Page](./images/quiz_page.png)
-![Scores Page](./images/score_page.png)
+![Main Page](./assets/images/main_page.png)
+![Quiz Page](./assets/images/quiz_page.png)
+![Scores Page](./assets/images/score_page.png)
 
 ## Link to website
 https://shyokmg.github.io/code-quiz/
