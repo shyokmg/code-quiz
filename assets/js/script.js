@@ -94,7 +94,6 @@ quizEl.addEventListener("click", function (event) {
 
 // Event when submit button is pressed after game over
 scoreForm.addEventListener("submit", function (event) {
-
     // append number
     var currentNum = storedScores.length;
     if (currentNum === 0){
