@@ -95,7 +95,7 @@ quizEl.addEventListener("click", function (event) {
 
 // Event when submit button is pressed after game over
 scoreForm.addEventListener("submit", function (event) {
-    // event.preventDefault();
+    event.preventDefault();
     console.log(storedScores.length);
     // append number
     var currentNum = storedScores.length;
@@ -123,7 +123,7 @@ scoreForm.addEventListener("submit", function (event) {
     
     // call function to store to local storage
     storeScores(highscores);
-    
+    window.location.replace("highscores.html");
 })
 
 
