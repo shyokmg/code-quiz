@@ -33,9 +33,9 @@ clearButton.addEventListener("click", function () {
 // Initialize page to get scores from local storage
 function init() {
     storedScores = JSON.parse(localStorage.getItem("highscores"));
-    if (storedScores !== null) {
-        highscores = storedScores;
-    }
+    // if (storedScores !== null) {
+    //     highscores = storedScores;
+    // }
     renderScores();
 }
 

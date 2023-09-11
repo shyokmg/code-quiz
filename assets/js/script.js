@@ -96,6 +96,7 @@ quizEl.addEventListener("click", function (event) {
 // Event when submit button is pressed after game over
 scoreForm.addEventListener("submit", function (event) {
     // event.preventDefault();
+    console.log(storedScores.length);
     // append number
     var currentNum = storedScores.length;
     if (currentNum === 0){
@@ -118,10 +119,10 @@ scoreForm.addEventListener("submit", function (event) {
 
     // push score entries to array
     highscores.push(scoreEntry);
-    initialsInput.value = "";
+    // initialsInput.value = "";
     
     // call function to store to local storage
-    storeScores();
+    storeScores(highscores);
     
 })
 
@@ -204,13 +205,14 @@ function gameOver() {
 
 
 // Store current scores to local storage.
-function storeScores() {
-    localStorage.setItem("highscores", JSON.stringify(highscores));
+function storeScores(arr) {
+    localStorage.setItem("highscores", JSON.stringify(arr));
 }
 
 // Initialize page to get scores from local storage
 function init() {
     storedScores = JSON.parse(localStorage.getItem("highscores"));
+    console.log(storeScores.length);
     secondsLeft = 0;
     timerEl.textContent = "Time: " + secondsLeft;
     if (storedScores !== null) {
