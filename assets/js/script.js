@@ -100,6 +100,9 @@ scoreForm.addEventListener("submit", function (event) {
     if (storedScores === null){
         storedScores = [];
     }
+    if (highscores === null){
+        highscores = [];
+    }
 
     var currentNum = storedScores.length + 1;
 
