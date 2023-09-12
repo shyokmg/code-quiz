@@ -19,7 +19,7 @@ var index = 0;
 var highscores;
 var timerInterval;
 var countDown = 0;
-var storedScores;
+var storedScores= [];
 
 // Timer functions
 function setTime() {
