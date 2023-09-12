@@ -16,10 +16,10 @@ var initialsInput = document.querySelector("#initials-text");
 var secondsLeft = 0;
 var currentQuestion;
 var index = 0;
-var highscores;
+var highscores = [];
 var timerInterval;
 var countDown = 0;
-var storedScores;
+var storedScores = [];
 
 // Timer functions
 function setTime() {
@@ -97,10 +97,10 @@ quizEl.addEventListener("click", function (event) {
 scoreForm.addEventListener("submit", function (event) {
     event.preventDefault();
     
-    if (storedScores === null){
+    if (storedScores === undefined){
         storedScores = [];
     }
-    if (highscores === null){
+    if (highscores === undefined){
         highscores = [];
     }
 
