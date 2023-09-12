@@ -97,9 +97,10 @@ quizEl.addEventListener("click", function (event) {
 scoreForm.addEventListener("submit", function (event) {
     event.preventDefault();
     
-    highscores = [];
     highscores = JSON.parse(localStorage.getItem("highscores"));
-    
+    if (highscores == null) {
+        highscores = [];
+    }
 
     var currentNum = highscores.length + 1;
 
