@@ -97,14 +97,11 @@ quizEl.addEventListener("click", function (event) {
 scoreForm.addEventListener("submit", function (event) {
     event.preventDefault();
     
-    if (storedScores === undefined){
-        storedScores = [];
-    }
-    if (highscores === undefined){
-        highscores = [];
-    }
+    highscores = [];
+    highscores = JSON.parse(localStorage.getItem("highscores"));
+    
 
-    var currentNum = storedScores.length + 1;
+    var currentNum = highscores.length + 1;
 
     // get initials input
     var initialsText = initialsInput.value.trim();
@@ -210,14 +207,10 @@ function storeScores(arr) {
     localStorage.setItem("highscores", JSON.stringify(arr));
 }
 
-// Initialize page to get scores from local storage
+// Initialize page 
 function init() {
-    storedScores = JSON.parse(localStorage.getItem("highscores"));
     secondsLeft = 0;
     timerEl.textContent = "Time: " + secondsLeft;
-    if (storedScores !== null) {
-        highscores = storedScores;
-    }
 }
 
 
