@@ -19,7 +19,7 @@ var index = 0;
 var highscores;
 var timerInterval;
 var countDown = 0;
-var storedScores= [];
+var storedScores;
 
 // Timer functions
 function setTime() {
@@ -97,6 +97,10 @@ quizEl.addEventListener("click", function (event) {
 scoreForm.addEventListener("submit", function (event) {
     event.preventDefault();
     
+    if (storedScores === null){
+        storedScores = [];
+    }
+
     var currentNum = storedScores.length + 1;
 
     // get initials input
