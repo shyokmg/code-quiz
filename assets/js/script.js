@@ -97,7 +97,6 @@ quizEl.addEventListener("click", function (event) {
 scoreForm.addEventListener("submit", function (event) {
     event.preventDefault();
     
-    console.log(storedScores.length);
     var currentNum = storedScores.length + 1;
 
     // get initials input
